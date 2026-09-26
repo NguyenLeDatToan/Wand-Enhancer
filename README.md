@@ -24,6 +24,7 @@ The default .NET patcher modifies files in the selected local Wand installation 
 ✅ Advanced layout and theme customization (Client-side only) <br/>
 ✅ AI Features <br/>
 ✅ Remote web panel (Remote Connect on mobile) <br/>
+✅ Vietnamese localization — patch adds *Tiếng Việt* to the client's Language list (Settings → General) <br/>
 
 ## 🌐 Remote Web Panel
 WandEnhancer includes a built-in **Remote Web Panel** allowing you to control app features directly from your phone.
@@ -64,6 +65,23 @@ This repository does not publish official compiled binaries. Build your own exec
 https://github.com/user-attachments/assets/7966cabe-0aa6-424d-8c2f-981ad91e0f91
 
 
+
+## 🇻🇳 Vietnamese localization patch
+
+Tick **Tiếng Việt** in the patch dialog (row between *Remote Web Panel preview* and *Auto-apply after updates*) before patching:
+
+```
+[Patch ON] VietnameseLocale (32)
+   ├─► supported-locales  += "vi-VN"          (i18n bundle)
+   ├─► language map       += vi:"Tiếng Việt"  (native name in dropdown)
+   └─► static/strings/vi-VN.json packed       (2,385 translated strings)
+                    ▼
+Settings › General › Language  →  select "Tiếng Việt"
+                    ▼
+Whole client UI switches to Vietnamese instantly (no restart).
+```
+
+The patch is language-neutral: it only *adds* Vietnamese to the list — the app keeps following *Automatic (English)* on an en-US Windows until you pick *Tiếng Việt*. Verified live on Wand 12.58.0: both anchors survive minified and prettified bundles (`node --check` clean) and the settings page renders full Vietnamese with correct diacritics.
 
 ## 🧩 Custom scripts
 
