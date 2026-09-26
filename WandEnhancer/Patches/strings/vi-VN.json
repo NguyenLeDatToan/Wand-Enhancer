@@ -436,7 +436,7 @@
   "button_add": "Thêm",
   "category_cheats": "mod",
   "category_enemies": "kẻ địch",
-  "category_game": "game",
+  "category_game": "trò chơi",
   "category_inventory": "kho đồ",
   "category_physics": "vật lý",
   "category_player": "người chơi",
@@ -535,7 +535,7 @@
   "play": "Chơi",
   "install_for_free": "Cài miễn phí",
   "install": "Cài",
-  "play_coaching_tip_header": "Let’s go!",
+  "play_coaching_tip_header": "Cùng đi!",
   "play_coaching_tip_message": "Sẵn sàng thử mod mới chưa? Khởi động game trực tiếp từ Wand.",
   "install_coaching_tip_install_game_header": "Cài hoặc tìm game",
   "install_coaching_tip_message": "Nhấn “Thêm game” để tải về trên nền tảng bạn chọn\nĐã cài rồi? Dùng menu “Thêm game” để tìm và thêm tệp game của bạn.",
@@ -1160,8 +1160,8 @@
   "upgrade_to_pro": "Nâng cấp Pro"
  },
  "creators_list": {
-  "$x_game": "**$x** game",
-  "$x_games": "**$x** game"
+   "$x_game": "**$x** trò chơi",
+   "$x_games": "**$x** trò chơi"
  },
  "email_dialog": {
   "thank_you_for_your_payment": "Cảm ơn bạn đã thanh toán!",
