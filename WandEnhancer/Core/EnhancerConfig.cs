@@ -141,8 +141,70 @@ namespace WandEnhancer.Core
                             Locate = LocateBridgeValueDelta
                         }
                     }
+                },
+                {
+                    EPatchType.VietnameseLocale,
+                    new[]
+                    {
+                        new PatchEntry
+                        {
+                            // i18n supported-locales array (module 73508): vi-VN must be listed
+                            // before setLocale accepts the tag and the settings dropdown shows it.
+                            Name = "vietnameseSupportedLocale",
+                            SearchHints = new[] { "\"en-US\",\"zh-CN\"" },
+                            Locate = LocateSupportedLocales
+                        },
+                        new PatchEntry
+                        {
+                            // i18next language map: adds the native "Tiếng Việt" display name.
+                            Name = "vietnameseLanguageMap",
+                            SearchHints = new[] { "locale:\"th-TH\"}" },
+                            Locate = LocateLanguageMap
+                        }
+                    }
                 }
             };
+        }
+
+        /// <summary>Inserts "vi-VN" straight after "en-US" in the supported-locales array.</summary>
+        private static JsEdit[] LocateSupportedLocales(JsCursor js)
+        {
+            const string anchor = "\"en-US\",\"zh-CN\"";
+            int at = js.IndexOf(anchor);
+            if (at < 0)
+            {
+                return null;
+            }
+
+            if (js.Text.IndexOf(anchor, at + anchor.Length, StringComparison.Ordinal) >= 0)
+            {
+                throw new Exception("Supported locale array matched more than once; cannot tell which one is the i18n list");
+            }
+
+            // 7 = length of "\"en-US\"" — insert the new element right after it.
+            return Edits(new JsEdit(at + 7, at + 7, ",\"vi-VN\""));
+        }
+
+        /// <summary>Appends the vi entry to the i18next language map that ends with the th entry.</summary>
+        private static JsEdit[] LocateLanguageMap(JsCursor js)
+        {
+            const string anchor = "locale:\"th-TH\"}";
+            int at = js.IndexOf(anchor);
+            if (at < 0)
+            {
+                return null;
+            }
+
+            if (js.Text.IndexOf(anchor, at + anchor.Length, StringComparison.Ordinal) >= 0)
+            {
+                throw new Exception("Language map tail matched more than once; cannot tell which map is the i18next list");
+            }
+
+            // ASCII + \u escapes keep this C# source free of non-ASCII literals.
+            return Edits(new JsEdit(
+                at + anchor.Length,
+                at + anchor.Length,
+                ",vi:{name:\"Vietnamese\",native:\"Ti\\u1EBFng Vi\\u1EC7t\",locale:\"vi-VN\"}"));
         }
 
         /// <summary>Wraps the account-returning promise so the resolved account always reports an active subscription.</summary>

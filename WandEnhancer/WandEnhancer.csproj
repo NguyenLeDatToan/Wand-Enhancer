@@ -142,6 +142,7 @@
         <Page Include="Locale\lang.uk-UA.xaml" />
         <Page Include="Locale\lang.ja-JP.xaml" />
         <Page Include="Locale\lang.tr-TR.xaml" />
+        <Page Include="Locale\lang.vi-VN.xaml" />
         <Page Include="Style\ColorScheme.xaml" />
         <Page Include="Style\Icons.xaml" />
         <Page Include="Style\Styles.xaml" />
@@ -189,6 +190,9 @@
     <ItemGroup>
       <EmbeddedResource Include="Patches\*.js">
         <LogicalName>patches/%(Filename)%(Extension)</LogicalName>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Patches\strings\vi-VN.json">
+        <LogicalName>strings/vi-VN.json</LogicalName>
       </EmbeddedResource>
     </ItemGroup>
     

@@ -46,6 +46,7 @@
     <s:String x:Key="pv_devtools">DevTools on F12</s:String>
     <s:String x:Key="pv_disable_updates">Disable updates</s:String>
     <s:String x:Key="pv_remote_web_panel_preview">Enable remote access (beta)</s:String>
+    <s:String x:Key="pv_vietnamese">Vietnamese UI for Wand</s:String>
     <s:String x:Key="pv_custom_scripts">Custom scripts</s:String>
     <s:String x:Key="pv_add_js_scripts">Add .js</s:String>
     <s:String x:Key="pv_custom_scripts_hint">Selected .js files are packed into Wand and loaded in the renderer.</s:String>

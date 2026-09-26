@@ -81,7 +81,8 @@ namespace WandEnhancer.View.Popups
         private void OnPatchButtonClick(object sender, RoutedEventArgs e)
         {
             if (ActivateProBox.IsChecked != true && DisableUpdateBox.IsChecked != true &&
-                DevToolsHotkeyBox.IsChecked != true && RemoteWebPanelPreviewBox.IsChecked != true)
+                DevToolsHotkeyBox.IsChecked != true && RemoteWebPanelPreviewBox.IsChecked != true &&
+                VietnameseLocaleBox.IsChecked != true)
             {
                 return;
             }
@@ -105,6 +106,11 @@ namespace WandEnhancer.View.Popups
             if (RemoteWebPanelPreviewBox.IsChecked == true)
             {
                 result.Add(EPatchType.RemoteWebPanelPreview);
+            }
+
+            if (VietnameseLocaleBox.IsChecked == true)
+            {
+                result.Add(EPatchType.VietnameseLocale);
             }
 
             _onApply(new PatchConfig

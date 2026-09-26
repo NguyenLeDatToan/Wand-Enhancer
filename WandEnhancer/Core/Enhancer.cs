@@ -151,6 +151,7 @@ namespace WandEnhancer.Core
             {
                 ExtractSources();
                 new AsarContentPatcher(_unpackedPath, _logger, new JavaScriptPatchApplier(_logger)).Patch(_config.PatchTypes);
+                new VietnameseStringsInstaller(_unpackedPath, _logger).Install(_config.PatchTypes);
                 new RemotePanelInjector(_unpackedPath, _logger).Inject(_config.PatchTypes, _config.CustomScriptPaths);
                 PackSources();
                 _strategy.ApplyEnablement(new PatchContext(_weModConfig, _logger, _unpackedPath));
