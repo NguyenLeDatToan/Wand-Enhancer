@@ -150,15 +150,16 @@ namespace WandEnhancer.Core
                         {
                             // i18n supported-locales array (module 73508): vi-VN must be listed
                             // before setLocale accepts the tag and the settings dropdown shows it.
+                            // Hint is the quoted locale tag so it survives esbuild's comma spacing.
                             Name = "vietnameseSupportedLocale",
-                            SearchHints = new[] { "\"en-US\",\"zh-CN\"" },
+                            SearchHints = new[] { "\"zh-CN\"" },
                             Locate = LocateSupportedLocales
                         },
                         new PatchEntry
                         {
                             // i18next language map: adds the native "Tiếng Việt" display name.
                             Name = "vietnameseLanguageMap",
-                            SearchHints = new[] { "locale:\"th-TH\"}" },
+                            SearchHints = new[] { "\"th-TH\"" },
                             Locate = LocateLanguageMap
                         }
                     }
@@ -166,44 +167,52 @@ namespace WandEnhancer.Core
             };
         }
 
+        // esbuild's unminified output inserts spaces after commas, so both locators match
+        // across whitespace; the quoted-tag hint still gates candidate files first.
+        private static readonly Regex SupportedLocalesHead =
+            new Regex("\"en-US\"\\s*,\\s*\"zh-CN\"", RegexOptions.CultureInvariant);
+
+        private static readonly Regex LanguageMapTail =
+            new Regex("locale\\s*:\\s*\"th-TH\"\\s*\\}", RegexOptions.CultureInvariant);
+
         /// <summary>Inserts "vi-VN" straight after "en-US" in the supported-locales array.</summary>
         private static JsEdit[] LocateSupportedLocales(JsCursor js)
         {
-            const string anchor = "\"en-US\",\"zh-CN\"";
-            int at = js.IndexOf(anchor);
-            if (at < 0)
+            MatchCollection matches = SupportedLocalesHead.Matches(js.Text);
+            if (matches.Count == 0)
             {
                 return null;
             }
 
-            if (js.Text.IndexOf(anchor, at + anchor.Length, StringComparison.Ordinal) >= 0)
+            if (matches.Count > 1)
             {
                 throw new Exception("Supported locale array matched more than once; cannot tell which one is the i18n list");
             }
 
             // 7 = length of "\"en-US\"" — insert the new element right after it.
-            return Edits(new JsEdit(at + 7, at + 7, ",\"vi-VN\""));
+            int insertAt = matches[0].Index + 7;
+            return Edits(new JsEdit(insertAt, insertAt, ",\"vi-VN\""));
         }
 
         /// <summary>Appends the vi entry to the i18next language map that ends with the th entry.</summary>
         private static JsEdit[] LocateLanguageMap(JsCursor js)
         {
-            const string anchor = "locale:\"th-TH\"}";
-            int at = js.IndexOf(anchor);
-            if (at < 0)
+            MatchCollection matches = LanguageMapTail.Matches(js.Text);
+            if (matches.Count == 0)
             {
                 return null;
             }
 
-            if (js.Text.IndexOf(anchor, at + anchor.Length, StringComparison.Ordinal) >= 0)
+            if (matches.Count > 1)
             {
                 throw new Exception("Language map tail matched more than once; cannot tell which map is the i18next list");
             }
 
             // ASCII + \u escapes keep this C# source free of non-ASCII literals.
+            int insertAt = matches[0].Index + matches[0].Length;
             return Edits(new JsEdit(
-                at + anchor.Length,
-                at + anchor.Length,
+                insertAt,
+                insertAt,
                 ",vi:{name:\"Vietnamese\",native:\"Ti\\u1EBFng Vi\\u1EC7t\",locale:\"vi-VN\"}"));
         }
 

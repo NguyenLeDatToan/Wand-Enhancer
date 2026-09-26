@@ -34,6 +34,13 @@ export function startApp() {
     myApp.whenReady().then(run);
 }
 
+export const i18nSupportedLocales = ["en-US", "zh-CN", "de-DE", "es-ES", "fr-FR"];
+
+export const i18nLanguageMap = {
+    en: { name: "English", native: "English", locale: "en-US" },
+    th: { name: "Thai", native: "ไทย", locale: "th-TH" }
+};
+
 export class RemoteClient {
     #trainerId;
     #instanceId;
