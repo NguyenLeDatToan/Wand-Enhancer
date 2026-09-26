@@ -3,12 +3,16 @@
 This file is the source of truth for release notes.
 The newest entry must match the version in `WandEnhancer/Properties/AssemblyInfo.cs`.
 
-## [Unreleased]
+## [2.2.0.0] - 2026-09-26
 
 ### Features
 
 - **Vietnamese localization (`VietnameseLocale` patch).** A new checkbox in the patch dialog injects `vi-VN` into Wand's i18n supported-locales list and language map, and installs a full `vi-VN.json` translation bundle (2,385 strings) into the client. After patching, Settings → General → Language shows *Tiếng Việt*; selecting it switches the whole client UI to Vietnamese. Locale anchors are whitespace-tolerant so they survive both minified and esbuild-prettified bundles, and both target files are verified against the real Wand 12.58.0 build (locator test + `node --check` + live UI screenshot).
 - The patcher's own window now ships a Vietnamese translation of its strings (parity-checked against the English resources).
+
+### Improvements
+
+- The shipped Vietnamese bundle closes the last untranslated strings found in a live UI sweep of all Settings tabs, the avatar menu, and the main page (`Let's go!` → `Cùng đi!`, `game` → `trò chơi`); brand names, hotkey labels, file names, and format placeholders stay intentionally as-is.
 
 ## [2.1.0.0] - 2026-09-09
 

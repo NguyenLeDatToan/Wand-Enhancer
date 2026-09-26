@@ -68,6 +68,8 @@ https://github.com/user-attachments/assets/7966cabe-0aa6-424d-8c2f-981ad91e0f91
 
 ## 🇻🇳 Vietnamese localization patch
 
+**Download:** grab `WandEnhancer.exe` from this fork's [Releases](../../releases) page — release **2.2.0.0** ships the prebuilt patcher with the Vietnamese bundle baked in, plus a step-by-step Vietnamese install guide in the release notes.
+
 Tick **Tiếng Việt** in the patch dialog (row between *Remote Web Panel preview* and *Auto-apply after updates*) before patching:
 
 ```
