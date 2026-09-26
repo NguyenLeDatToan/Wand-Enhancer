@@ -68,7 +68,7 @@ https://github.com/user-attachments/assets/7966cabe-0aa6-424d-8c2f-981ad91e0f91
 
 ## 🇻🇳 Vietnamese localization patch
 
-**Download:** grab `WandEnhancer.exe` from this fork's [Releases](../../releases) page — release **2.2.0.0** ships the prebuilt patcher with the Vietnamese bundle baked in, plus a step-by-step Vietnamese install guide in the release notes.
+**Download:** grab `WandEnhancer.exe` directly from release [2.2.0.0](../../releases/tag/2.2.0.0) (or this fork's [Releases](../../releases) page) — it ships the prebuilt patcher with the Vietnamese bundle baked in, plus a step-by-step Vietnamese install guide in the release notes.
 
 Tick **Tiếng Việt** in the patch dialog (row between *Remote Web Panel preview* and *Auto-apply after updates*) before patching:
 
@@ -151,7 +151,7 @@ Update notifications are excluded by default. To compile them in locally, run `b
 - **Why is there no `.exe` in GitHub Releases?**
   - Official releases are notes-only on purpose. The project no longer distributes prebuilt executables because unsigned or self-built patching tools are repeatedly reuploaded, mislabeled, and flagged by third-party scanners. Build the executable from your own fork using GitHub Actions instead.
 - **Where do I download the executable?**
-  - From your own fork's **Actions** artifact after running the **Build executable** workflow. Do not download `.exe` files from YouTube descriptions, random mirrors, Discord attachments, or issue comments.
+  - From your own fork's **Actions** artifact after running the **Build executable** workflow, or from a **Releases** page of your own fork when you publish one (this fork's [2.2.0.0](../../releases/tag/2.2.0.0) release ships the prebuilt Vietnamese-enabled patcher). Do not download `.exe` files from YouTube descriptions, random mirrors, Discord attachments, or issue comments.
 - **Why does Windows Defender or SmartScreen warn about my build?**
   - The GitHub Actions artifact is unsigned and uncommon, so Windows may warn even when the code was built directly from your fork. Review the source, verify the workflow logs, and only run binaries you built yourself.
 - **Can I use a binary built by someone else?**
