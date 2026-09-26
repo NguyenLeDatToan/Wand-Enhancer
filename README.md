@@ -10,6 +10,8 @@
 
 <h4>An open-source interoperability tool designed to extend local client-side configurations and improve the UX of the Wand application.</h4>
 
+<p>🌐 <b>English</b> · <a href="#tieng-viet">Tiếng Việt</a></p>
+
 **🚨 IMPORTANT NOTICE: THIS PROJECT HAS NO OFFICIAL YOUTUBE TUTORIALS, GUIDES, OR PREBUILT EXECUTABLE DOWNLOADS. 🚨
 There are no official videos showing how to install or use this tool. Scammers are creating fake tutorials using this project's name and placing malware/password stealers in the video descriptions. Official GitHub releases contain release notes only, not `.exe` files. If you downloaded an `.exe` or archive from a YouTube link, a random website, or a third-party mirror, you did not get it from this project. We are not responsible for third-party downloads.**
 
@@ -169,6 +171,138 @@ Update notifications are excluded by default. To compile them in locally, run `b
 ![2](./assets/screenshots/app2.png)
 </div>
 
+
+<a id="tieng-viet"></a>
+
+## 🇻🇳 Tiếng Việt
+
+*Bản dịch tiếng Việt của README — bản gốc tiếng Anh nằm ở phía trên trang.*
+
+### ⚠️ Cảnh báo quan trọng
+
+**🚨 DỰ ÁN NÀY KHÔNG CÓ VIDEO HƯỚNG DẪN, BÀI HƯỚNG DẪN HAY FILE .exe CHÍNH THỨC NÀO TRÊN YOUTUBE. 🚨**
+Không có video chính thức nào hướng dẫn cài đặt hay sử dụng công cụ này. Kẻ lừa đảo đang dùng tên dự án để làm video giả và đặt mã độc/steal mật khẩu trong phần mô tả. Bản release chính thức trên GitHub chỉ có ghi chú phát hành, không kèm file `.exe`. Nếu bạn tải `.exe` hoặc file nén từ link YouTube, trang web lạ hay trang tải bên thứ ba thì **không phải từ dự án này**. Chúng tôi không chịu trách nhiệm với file tải từ bên thứ ba.
+
+### 👾 Công cụ này truy cập gì?
+
+Patcher .NET mặc định chỉ sửa file trong thư mục cài Wand cục bộ, **không** chứa mã kiểm tra cập nhật hay telemetri. Wand vẫn là ứng dụng online; công cụ build tải đúng các dependency được khai báo; Remote Web Panel (tùy chọn) chủ động mở server HTTP/WebSocket trên mạng LAN và dùng dữ liệu từ API/CDN của Wand. Tùy chọn build có thể bật thông báo release qua GitHub (chỉ gửi một request tới GitHub kèm IP + User-Agent khi Wand khởi động, không gửi dữ liệu Wand/tài khoản, không bao giờ tải hay cài cập nhật). Hãy xem mã nguồn và tự build exe từ fork của bạn; công cụ patch chưa chữ ký có thể bị antivirus cảnh báo false positive.
+
+### 💫 Tính năng được cải thiện
+
+✅ Quản lý cấu hình môi trường cục bộ <br/>
+✅ Tự động điều chỉnh tương thích cho phiên bản client mới <br/>
+✅ Tùy chỉnh giao diện & chủ đề nâng cao (chỉ phía client) <br/>
+✅ Tính năng AI <br/>
+✅ Remote Web Panel (điều khiển Wand từ điện thoại) <br/>
+✅ Hỗ trợ tiếng Việt — patch thêm *Tiếng Việt* vào danh sách Ngôn ngữ (Cài đặt → Chung) <br/>
+
+### 🌐 Remote Web Panel (điều khiển từ điện thoại)
+
+WandEnhancer có sẵn **Remote Web Panel** để bạn điều khiển các tính năng ngay từ điện thoại.
+
+**Bắt đầu nhanh:**
+1. Đảm bảo PC và điện thoại cùng mạng **Wi-Fi**.
+2. Di chuột lên nút **Connect** trên thanh công cụ của WandEnhancer.
+3. Quét **mã QR** hiển thị bằng camera điện thoại.
+
+**Xử lý sự cố & truy cập từ xa:**
+- **Trang không tải được?** Kiểm tra cả hai thiết bị cùng **mạng nội bộ**. Một số router/wifi khách bật cô lập client (AP isolation) khiến các thiết bị cùng SSID không thấy nhau. Nếu vẫn không được, mở Windows Firewall cho phép inbound TCP cổng `3223`; nếu kết nối đang ở chế độ **Public**, đổi sang **Private** cũng có ích.
+- **Dùng dữ liệu di động hoặc mạng khác?** Muốn dùng panel qua LTE/5G hay mạng hoàn toàn khác, hãy dùng [Tailscale](https://tailscale.com/) hoặc công cụ VPN tương tự.
+- Panel chạy HTTP thường trên cổng `3223`, không có mã ghép cặp. Ai chạm được tới cổng này đều xem được panel và điều khiển trainer đang chạy — chỉ dùng trên LAN/VPN đáng tin cậy, **không** expose cổng ra internet.
+- Giao thức panel **không** chứa bearer token Wand hay đường dẫn cài đặt của bạn.
+
+### 👀 Cách dùng
+
+Kho lưu trữ này **không** đăng file exe chính thức. Hãy tự build exe từ fork của bạn qua GitHub Actions:
+
+1. Đăng nhập GitHub và fork kho này.
+2. Dùng **Sync fork** trước mỗi lần build để fork có bản sửa lỗi mới nhất.
+3. Mở fork → tab **Actions** → bật workflows nếu GitHub yêu cầu.
+4. Chọn workflow **Build executable**.
+5. Bấm **Run workflow**. Giữ tắt **Include GitHub release checks when Wand starts** để patcher hoàn toàn offline, hoặc bật nếu muốn compile thêm thông báo bản mới.
+6. Chờ workflow chạy xong, mở run đã hoàn tất rồi tải artifact.
+7. Giải nén artifact và chạy `WandEnhancer.exe` để áp dụng các bản vá client cục bộ.
+
+*Xem video minh họa ở mục tiếng Anh phía trên.*
+
+### 🇻🇳 Patch Việt hóa — cài đặt chi tiết
+
+**Tải về:** lấy `WandEnhancer.exe` trực tiếp từ release [2.2.0.0](../../releases/tag/2.2.0.0) (hoặc trang [Releases](../../releases) của fork này) — bản này đã kèm sẵn patcher với bundle tiếng Việt, kèm hướng dẫn cài từng bước trong ghi chú phát hành.
+
+**Các bước cài:**
+1. Tải `WandEnhancer.exe` từ mục **Assets** của release.
+2. Đóng Wand hoàn toàn (Quit từ khay + kiểm tra Task Manager cho chắc).
+3. Chạy `WandEnhancer.exe` — nếu SmartScreen chặn: **More info → Run anyway** (exe chưa chữ ký nên Windows cảnh báo là bình thường).
+4. Trong hộp thoại patch, tick **Tiếng Việt** (dòng nằm giữa *Remote Web Panel preview* và *Auto-apply after updates*); các option khác (Activate Pro...) tùy chọn.
+5. Bấm **Patch**, chờ khoảng 1 phút (chương trình tự backup 2 file trước khi sửa).
+6. Mở Wand → avatar góc phải → **Cài đặt** → **Chung** → **Ngôn ngữ** → chọn **Tiếng Việt** → toàn bộ giao diện chuyển ngay, không cần mở lại.
+7. Muốn gỡ: mở patcher → bấm **Restore**.
+
+```
+[Patch ON] VietnameseLocale (32)
+   ├─► supported-locales  += "vi-VN"          (bundle i18n)
+   ├─► language map       += vi:"Tiếng Việt"  (tên bản xứ trong dropdown)
+   └─► static/strings/vi-VN.json packed       (2.385 chuỗi đã dịch)
+                    ▼
+Cài đặt › Chung › Ngôn ngữ  →  chọn "Tiếng Việt"
+                    ▼
+Toàn bộ giao diện client chuyển tiếng Việt ngay lập tức (không restart).
+```
+
+Patch trung lập ngôn ngữ: nó chỉ *thêm* tiếng Việt vào danh sách — Windows en-US vẫn theo *Automatic (English)* cho tới khi bạn tự chọn *Tiếng Việt*. Đã test trực tiếp trên Wand 12.58.0: cả hai neo chịu được bundle nén lẫn tinh giản (`node --check` sạch) và trang cài đặt hiển thị đủ dấu tiếng Việt.
+
+### 🧩 Script tùy chỉnh
+
+Bạn có thể tiêm JavaScript riêng vào Wand lúc patch để tinh chỉnh/gỡ lỗi giao diện client. Đây là cùng cơ chế renderer injection với Remote Web Panel nên cần bật patch **Remote Web Panel**.
+
+**Cách thêm script**
+- Trong hộp thoại patch, thêm một hoặc nhiều file `.js` (chỉ nhận file `.js` đã tồn tại), **hoặc**
+- Đặt file `.js` vào thư mục `renderer-scripts/` cạnh file patcher.
+
+Rồi patch như bình thường — script được đóng gói vào client và chạy trong cửa sổ Wand.
+
+**Cách chạy**
+- Mỗi script chạy trong renderer của Wand (toàn quyền DOM + `require` của Node).
+- Script được bọc để lỗi chỉ được ghi log, không bao giờ làm Wand crash.
+- Có thể chạy **nhiều hơn một lần** mỗi lần mở app (lúc load và ngay sau đó) — việc chạy một lần nên đặt sau cờ toàn cục.
+- Có helper `WandEnhancer`: `WandEnhancer.log(...)`, `WandEnhancer.remoteUrl`, `WandEnhancer.apiVersion`.
+
+> Script chạy với đúng đặc quyền của client Wand. Chỉ thêm script bạn tin tưởng và hiểu rõ.
+
+### 🛠️ Build từ nguồn
+
+Build trên Windows cần môi trường phát triển cục bộ.
+
+**Yêu cầu**
+- `Node.js` và `pnpm`
+- `Visual Studio 2022` hoặc `Build Tools for Visual Studio 2022` kèm `MSBuild`
+- Bộ công cụ/build pack .NET Framework 4.8 desktop
+
+**Các bước build**
+1. Clone kho này.
+2. Cài yêu cầu trên, đảm bảo `pnpm` và `MSBuild` chạy được.
+3. Chạy `build.cmd` từ Command Prompt hoặc PowerShell.
+
+Script build sẽ cài dependency, lint và type-check panel, build bản production, chạy test web, build WPF, rồi kiểm tra trạng thái patch và các patch JavaScript cấu trúc. Test dùng fixture tạm, **không** đụng tới cài Wand của bạn.
+
+Thông báo cập nhật bị loại trừ theo mặc định; muốn bật local thì chạy `build.cmd -EnableUpdateNotifications`.
+
+### ❓ Hỏi–Đáp
+
+- **Tại sao release chính thức không có `.exe`?**
+  - Bản release chính thức cố tình chỉ có ghi chú — dự án không phân phối exe dựng sẵn vì công cụ patch chưa chữ ký/tự build thường bị người khác tải lại, gắn nhãn sai và bị scanner cảnh báo. Hãy tự build từ Actions.
+- **Tải exe ở đâu?**
+  - Từ **Actions** artifact của chính fork bạn sau khi chạy workflow **Build executable**, hoặc trang **Releases** của fork bạn nếu bạn publish (fork này có release [2.2.0.0](../../releases/tag/2.2.0.0) kèm patcher đã bật tiếng Việt). **Không** tải `.exe` từ mô tả YouTube, trang mirror lạ, Discord hay comment issue.
+- **Windows Defender/SmartScreen cảnh báo build của tôi?**
+  - Artifact từ Actions chưa chữ ký và hiếm nên Windows có thể cảnh báo dù code tự build từ fork của bạn. Hãy xem lại mã nguồn, đối chiếu log workflow và chỉ chạy binary bạn tự build.
+- **Dùng binary người khác build được không?**
+  - Được nhưng hãy coi là không đáng tin — kho này không thể xác minh hay hỗ trợ build bên thứ ba.
+- **Có gửi dữ liệu đi đâu không?**
+  - Patcher .NET mặc định hoàn toàn offline. Remote Web Panel (tùy chọn) chỉ nghe trên LAN của bạn và có thể xin bản dịch/ảnh minh họa trainer qua đường API/CDN sẵn có của Wand. Nếu bạn chủ động compile thông báo kiểm tra release, mỗi lần Wand khởi động chỉ gọi API release công khai của GitHub (kèm IP + User-Agent) — không có telemetri, không tải, không tự cập nhật.
+- **Làm sao biết bản mới mà không bật kiểm tra cập nhật trong app?**
+  - Trên GitHub chọn **Watch → Custom → Releases**, rồi sync fork và chạy **Build executable** khi có release mới. Cũng có thể bật thông báo lúc build trong workflow thủ công.
+
+---
 
 ## 📜 License
 This project is licensed under the Apache-2.0 - see the [LICENSE](LICENSE.md) file for details.
